@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>MOM-admin</title>
+     <!--  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
+     <script src="http://code.angularjs.org/1.2.3/angular-animate.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular-route.min.js"></script>
+ -->
+    <!-- Bootstrap core CSS -->
+    <link href="styles/bootstrap.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="styles/sb-admin.css" rel="stylesheet">
+    <link href="styles/style.css" rel="stylesheet" >
+    <!-- Page Specific CSS -->
+   
+  </head>
+
+  <body ng-app="adminApp" ng-controller="mainCtrl">
+
+    <div id="wrapper" >
+
+      <!-- Sidebar -->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" >
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">MOM Admin</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav side-nav">
+            <li ><a href="#/" class='main-nav'><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
+            <li><a href="#/user" class='main-nav initclick'><span class="glyphicon glyphicon-user"></span> User</a></li>
+            <li><a href="#/article" class='main-nav'><span class="glyphicon glyphicon-align-center"></span> Articles</a></li>
+            <li><a href="#/project" class='main-nav'><span class="glyphicon glyphicon-th-large"></span> Projets</a></li>
+            <li><a href="#/images" class='main-nav'><span class="glyphicon glyphicon-picture"></span> Images</a></li>
+            <li><a href="#/livredor" class='main-nav'><span class="glyphicon glyphicon-comment"></span> Livre d'or</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right navbar-user">
+            
+            <li class="dropdown user-dropdown">
+              <a  class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ user.username }}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#/account/profile"><i class="fa fa-user"></i> Profile</a></li>
+                <li><a href="#/settings"><i class="fa fa-gear"></i> Settings</a></li>
+                <li class="divider"></li>
+                <li><a href="/account/logout"><span class="glyphicon glyphicon-off"></span> Log Out</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </nav>
+
+      <div id="page-wrapper" ng-view>
+       
+
+      </div><!-- /#page-wrapper-->
+
+    </div><!-- /#wrapper -->
+
+    <!--Bootstrap core JavaScript 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    -->
+    <embed src="/scripts/vendors/FileAPI.flash.swf" quality="high">
+  
+    <script src="/scripts/vendors/jquery.js"></script>
+
+    <script src="/scripts/vendors/bootstrap.js"></script>
+
+    <script src="/scripts/vendors/FileAPI.min.js"></script>
+    <script src="/scripts/vendors/angular-file-upload-html5-shim.js"></script>
+    <script src="/scripts/vendors/angular.js"></script>
+    <script src="/scripts/vendors/angular-route.js"></script>
+    <script src="/scripts/vendors/angular-file-upload.js"></script>
+    <script src="/scripts/vendors/ui.keypress.js"></script>
+    
+
+    <script src="/scripts/app/app.js"></script>
+    <script src="/scripts/app/controllers/main.js"></script>
+    <!--<script src="/scripts/app/controllers/user.js"></script>
+    <script src="/scripts/app/controllers/profile.js"></script>-->
+    <script src="/scripts/app/controllers/user.js"></script>
+    <script src="/scripts/app/controllers/project.js"></script>
+    <script src="/scripts/app/controllers/article.js"></script>
+    <script src="/scripts/app/controllers/profile.js"></script>
+    <script src="/scripts/app/controllers/livredor.js"></script>
+    <script src="/scripts/app/controllers/images.js"></script>
+    <script src="/scripts/app/controllers/upload.js"></script>
+    <script src="/scripts/app/controllers/settings.js"></script>
+    <script src="/scripts/app/services/projectsApi.js"></script>
+    <script src="/scripts/app/services/articlesApi.js"></script>
+    <script src="/scripts/app/services/handleUser.js"></script>
+    <script src="/scripts/app/services/imagesApi.js"></script>
+    <script src="/scripts/app/services/settingsApi.js"></script>
+    <script src="/scripts/app/services/livredorApi.js"></script>
+    <script src="/scripts/app/directives/focusInput.js"></script>
+    <script src="/scripts/app/filters/wrap.js"></script>
+    <script src="/scripts/app/filters/bytes.js"></script>
+    <script src="/scripts/app/filters/bytes.js"></script>
+    <!-- <script src="/scripts/app/directives/blur.js"></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript">
+
+    
+      // $('.initclick').click();
+
+    </script>
+    
+  </body>
+</html>

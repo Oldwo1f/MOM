@@ -1,0 +1,81 @@
+<div ng-controller="livredorCtrl">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1>Commentaires utilisateurs <ng-pluralize class="small" ng-show="nbLivredors" count="nbLivredors"  when="{'0': 'Aucun commentaire','1': '{{nbLivredors}} commentaire','other': '{{nbLivredors}} commentaires'}" </ng-pluralize></h1>
+		</div>
+	</div><!-- /.row -->
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="tableheader">
+					<div class="tableaction  col-md-6 col-lg-6 pull-left">
+						<button class='btn btn-default btn-danger' ng-hide="supprimerVerif" ng-click="suppVerif()" ng-disabled="disableOptions"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
+						<button class='btn btn-danger' ng-show="supprimerVerif" ng-click="supprimer()" ng-disabled="disableOptions"> <span class="glyphicon glyphicon-trash"></span>Supprimer définitivement?</button>
+						<button class='btn btn-success'  ng-click="publish(true)" ng-disabled="disableOptions"> <span class="glyphicon glyphicon-ok"></span>Publier</button>
+						<button class='btn btn-warning'  ng-click="publish(false)" ng-disabled="disableOptions"> <span class="glyphicon glyphicon-share-alt"></span>Dépublier</button>
+						<div class="nbselected ">
+							<ng-pluralize class="small" ng-show="nbChecked" count="nbChecked"  when="{'0': 'Aucun commentaire séléctionné','1': '{{nbChecked}} commentaire séléctionné','other': '{{nbChecked}} commentaires séléctionnés'}" </ng-pluralize>
+						</div>
+					</div>
+			</div>
+			
+				<div class="lightbox col-md-8 col-lg-8 " ng-show="lightboxEditLivredor">
+					<button type="button" class="close" ng-click="lightboxEditLivredor = false; closeLightBox()">×</button>
+					<h3>Editer un livredor</h3>
+					<form ng-submit="editLivredor()">
+
+						<div class="form-group" rel="name">
+			                <label for="name">Nom</label>
+			                <input type="text" class="form-control" id="name" name="name" placeholder="Entrez le nom du projet" ng-model="editLivredorInputName"required>
+			            </div>
+			           <div class="form-group" rel="description">
+			                <label for="description">Description</label>
+			                <textarea type="text" class="form-control" id="description" name="description" placeholder="Entrez votre description"  rows="7" ng-model="editLivredorInputDescription"></textarea>
+			            </div>
+			           
+						<div class="handleErrors"></div>
+						<button type="submit" class="btn btn-default" >Submit</button>
+					</form>
+				</div>
+			  	<table class="table table-bordered table-hover tablesorter tableLivredor">
+					<thead>
+						<tr class="tableLivredor">
+							<th style="width: 30px;">
+								<input type="checkbox" ng-show="chargementTerminer" ng-click="checkAll(allchecked)" ng-model="allchecked" >
+							</th>
+							<th>Publié? <i class="fa fa-sort"></i></th>
+
+							<th>Auteur<i class="fa fa-sort"></i></th>
+							<th>Message <i class="fa fa-sort"></i></th>
+							<th>Date<i class="fa fa-sort"></i></th>
+						 </tr>
+					</thead>
+					<tbody>
+						<tr class="chargement" ng-hide="chargementTerminer">
+							<td colspan="4">Chargement . . .</td>
+						</tr>
+					  <tr ng-repeat="livredor in livredors" class="tableLivredor" ng-class="{selectedRow: livredor.selected}" ng-dblclick="checkAll(true);livredor.selected = true; editPage() ">
+					  	
+						<td><input type="checkbox" ng-model="livredor.selected"></td>
+						<td>
+							<span class="label label-success" ng-show="livredor.published == true">Oui</span>
+							<span class="label label-danger" ng-show="livredor.published == false">Non</span>
+							<span class="label label-warning" ng-show="livredor.published == null">New</span>
+						</td>
+						<td>{{ livredor.author }}</td>
+						<td>
+							<p ng-hide="livredor.selected">{{ livredor.content | wrap }}</p>
+							<p ng-show="livredor.selected">{{ livredor.content }}</p>
+
+						</td>
+						<td>{{ livredor.createdAt | date:'dd/MM/yyyy - HH:MM' }}</td>
+						
+					  </tr>
+					  
+					  
+					</tbody>
+			  	</table>
+			</div>
+		</div>
+	</div>
+</div>
+

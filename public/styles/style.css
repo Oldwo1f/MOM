@@ -1,0 +1,79 @@
+
+.glyphicon {margin-right: 4px;}
+
+
+.table > thead > tr > td.selectedRow, .table > tbody > tr > td.selectedRow, .table > tfoot > tr > td.selectedRow, .table > thead > tr > th.selectedRow, .table > tbody > tr > th.selectedRow, .table > tfoot > tr > th.selectedRow, .table > thead > tr.selectedRow > td, .table > tbody > tr.selectedRow > td, .table > tfoot > tr.selectedRow > td, .table > thead > tr.selectedRow > th, .table > tbody > tr.selectedRow > th, .table > tfoot > tr.selectedRow > th {
+background-color: #fcf8e3;
+}
+.table > tbody > tr{
+  cursor:pointer;
+}
+.tableaction{ position:relative;height : 60px; margin-bottom : 0px; padding-left : 0px;}
+.nbselected{ position:relative;height : 20px; margin-bottom : 0px; padding-left : 0px; padding-top : 7px;}
+.response{ padding-left:0;padding-right:0;}
+
+.alert {padding: 5px 15px;}
+.alert-dismissable .close {top: auto;right: auto;}
+.lightbox{position:absolute; border-radius: 5px; border:1px solid grey;background : white; margin-left : 50%; left : -33.3333%;padding-bottom: 20px; box-shadow: 5px 5px 10px;}
+/*.alert {padding: 15px;margin-bottom: 20px;border: 1px solid transparent;border-radius: 4px;}*/
+a{cursor:pointer;}
+.small{font-size: 85%; color:silver;}
+h1 .small{font-size: 50%; color:silver;}
+.imggest{ padding-top : 0px; border-radius : 5px;-khtml-user-select: none;  -webkit-user-select: none;  -moz-user-select: -moz-none;  -ms-user-select: none;user-select: none; }
+.blockimg{ overflow:hidden; cursor:pointer; height : 100px;background:white; margin-bottom : 30px;border-radius : 5px;border : 1px solid grey;box-shadow: 2px 2px 2px grey;-khtml-user-select: none;  -webkit-user-select: none;  -moz-user-select: -moz-none;  -ms-user-select: none;user-select: none; }
+.blockimg img {float:left;height : 90px;margin-top : 5px; margin-left : 5px;-khtml-user-select: none;  -webkit-user-select: none;  -moz-user-select: -moz-none;  -ms-user-select: none;user-select: none; }
+.blockimg p{ float:none; margin-left : 10px; margin-top:20px; position:absolute; right:25px; background:white; padding-left:5px;}
+.blockimg .btn{ padding: 2px 6px; position: absolute; right: 20px; bottom: 35px; font-size: 11px;}
+.blockimg input{ margin-top: 10px;margin-left: 5px;position:absolute; right:25px; background:white; padding-left:5px;}
+.small-input {width : 30%; min-width : 250px;}
+
+@media (min-width: 992px) { .response{ padding-left:15px;padding-right:0px;} }
+.btn{padding: 6px 12px;transition: all 0.5s;
+-webkit-transition: all 0.5s;}
+h3{}
+#uploadTable{ text-align:center; width : 100%;}
+.uploadRow td:first-child{width : 70px;}
+.uploadRow td:first-child + td {width : 200px;}
+.uploadRow td:first-child + td + td {width : 100px;}
+.uploadRow td:first-child + td + td + td{}
+.uploadRow td:first-child + td + td + td +td{width : 100px;}
+.drop-box{ text-align:center;color: rgb(92, 184, 92);  border : dashed rgb(92, 184, 92) 2px;  position : absolute;  display : inline-block;  right : 0px;  border-radius : 4px;  padding : 5px;  left : 180px;}
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+}
+.progress{ margin-bottom:0px;}
+.progress-bar{ text-align:right;padding-right:5px;}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px;
+  direction: ltr;
+  cursor: pointer;
+}
+
+/* Fixes for IE < 8 */
+@media screen\9 {
+  .fileinput-button input {
+    filter: alpha(opacity=0);
+    font-size: 100%;
+    height: 100%;
+  }
+}
+.navbar-nav.navbar-right:last-child{ margin-right : 10px;}
+#configBox{ -khtml-user-select: none;  -webkit-user-select: none;  -moz-user-select: -moz-none;  -ms-user-select: none;user-select: none;}
+#configBox .form-group{ cursor:pointer;}
+.inputMedium{width : 250px; height : 25px;margin-top : 2px;}
+.inputSmall{width : 150px;height : 25px;margin-top : 2px;}
+.form-control-static {text-indent:10px;}
+.saveMap{ position:relative; right:0px;}
+
+.tableLivredor th:first-child{max-width : 30px;}
+.tableLivredor th:first-child + th {width : 60px;}
+.tableLivredor th:first-child + th + th + th{}
+.tableLivredor th:first-child + th + th + th +th{max-width : 100px;}
+table p {margin-bottom:0px;}

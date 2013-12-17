@@ -1,0 +1,92 @@
+
+<div ng-controller="userCtrl">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1>Gestion des utilisateurs <ng-pluralize class="small" ng-show="nbUsers" count="nbUsers"  when="{'0': 'Aucun Utilisateur','1': '{{nbUsers}} utilisateur','other': '{{nbUsers}} utilisateurs'}" </ng-pluralize></h1>
+		</div>
+	</div><!-- /.row -->
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="tableheader">
+				<!-- <div class="row"> -->
+					
+					<!-- <div class="response  col-md-6 col-lg-6 pull-right">
+						<div class="alert alert-success alert-dismissable">
+						  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						  Welcome to SB Admin by <a class="alert-link" href="http://startbootstrap.com">Start Bootstrap</a>! Feel free to use this template
+						</div>
+					</div> -->
+					<div class="tableaction  col-md-6 col-lg-6 pull-left">
+						<!-- <ng-pluralize class="small" ng-show="nbChecked" count="nbChecked"  when="{'0': 'Aucun Utilisateur séléctionné','1': '{{nbChecked}} utilisateur séléctionné','other': '{{nbChecked}} utilisateurs séléctionnés'}" </ng-pluralize> -->
+						<button class='btn btn-default btn-success' ng-click="lightboxAddUser =true;"><span class="glyphicon glyphicon-plus"></span> Ajouter</button>
+						<button class='btn btn-default btn-danger ' ng-hide="supprimerVerif" ng-click="suppVerif()" ng-disabled="disableOptions"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
+						<button class='btn btn-default btn-danger ' ng-show="supprimerVerif" ng-click="supprimer()" ng-disabled="disableOptions"><span class="glyphicon glyphicon-trash"></span> Supprimer définitivement?</button>
+						<div class="nbselected ">
+							<ng-pluralize class="small" ng-show="nbChecked" count="nbChecked"  when="{'0': 'Aucun Utilisateur séléctionné','1': '{{nbChecked}} utilisateur séléctionné','other': '{{nbChecked}} utilisateurs séléctionnés'}" </ng-pluralize>
+						</div>
+					</div>
+
+				<!-- </div> -->
+			</div>
+			<div class="table-responsive">
+				<div class="lightbox col-md-8 col-lg-8 " ng-show="lightboxAddUser">
+					<button type="button" class="close" ng-click="lightboxAddUser = false; closeLightBox()">×</button>
+					<h3>Ajouter un utilisateur</h3>
+					<form ng-submit="addUser()">
+						
+
+						<div class="form-group" rel="username">
+			                <label for="username">Login</label>
+			                <input type="text" class="form-control" id="username" name="username" placeholder="user545" ng-model="newUserInputLogin"required>
+			            </div>
+			            <div class="form-group" rel="email">
+			                <label for="email">Addresse email</label>
+			                <input type="email" class="form-control" id="email" name="email" placeholder="toto@gmail.fr" ng-model="newUserInputEmail"required/>
+			            </div>
+			            <div class="form-group" rel="password">
+			                <label for="password">Mot de passe</label>
+			                <input type="password" class="form-control" id="password" name="password" placeholder="Choisir un mot de passe bien long" ng-model="newUserInputPassword"required>
+			            </div>
+			            <div class="form-group" rel="password">
+			                <label for="confirmPassword">Confirmation</label>
+			                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmer le mot de passe"  ng-model="newUserInputConfirmPassword" required/>
+			            </div>
+						<div class="handleErrors"></div>
+						<button type="submit" class="btn btn-default" >Submit</button>
+
+
+
+
+					</form>
+				</div>
+			  <table class="table table-bordered table-hover tablesorter">
+				<thead>
+					<tr>
+						<th style="width: 30px;">
+							<input type="checkbox" ng-show="chargementTerminer" ng-click="checkAll(allchecked)" ng-model="allchecked" >
+						</th>
+						<th>Login <i class="fa fa-sort"></i></th>
+						<th>email <i class="fa fa-sort"></i></th>
+						<th>droit <i class="fa fa-sort"></i></th>
+					 </tr>
+				</thead>
+				<tbody>
+					<tr class="chargement" ng-hide="chargementTerminer">
+						<td colspan="4">Chargement . . .</td>
+					</tr>
+				  <tr ng-repeat="user in users" ng-class="{selectedRow: user.selected}">
+
+					<td><input type="checkbox" ng-model="user.selected"></td>
+					<td>{{ user.username }}</td>
+					<td>{{ user.email }}</td>
+					<td>{{ user.droit }}</td>
+				  </tr>
+				  
+				  
+				</tbody>
+			  </table>
+			</div>
+		</div>
+	</div>
+</div>
+

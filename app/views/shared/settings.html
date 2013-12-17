@@ -1,0 +1,124 @@
+<h1>Configuration</h1>
+<p class="help-block">Double clicker sur une information pour la modifier</p>
+<div ng-controller="settingsCtrl" id="configBox">
+ <form class="form-horizontal">
+  <div class="form-group" focus-input="name">
+    <label class="col-sm-4 control-label" >Nom de l'entreprise</label>
+    <div class="col-sm-8" ng-hide="editing == 'name' ">
+      <p class="form-control-static">{{ options.name.value || 'CoolCompany'}}</p>
+    </div>
+    <div class="col-sm-8" ng-show="editing == 'name' ">
+      <input ui-keypress="{13:'keypressCallback($event)'}" type="text" class="form-control inputSmall" ng-model="options.name.value" blur-input="name">
+    </div>
+  </div>
+</form>
+<form class="form-horizontal">
+  <div class="form-group" focus-input="fixe">
+    <label for="inputPassword" class="col-sm-4 control-label">Fixe</label>
+    <div class="col-sm-8" ng-hide="editing == 'fixe' ">
+      <p class="form-control-static">{{ options.fixe.value || '0000000000'}}</p>
+    </div>
+    <div class="col-sm-2" ng-show="editing == 'fixe' ">
+      <input ui-keypress="{13:'keypressCallback($event)'}" type="text" class="form-control inputSmall" ng-model="options.fixe.value" blur-input="fixe">
+    </div>
+  </div>
+  <div class="form-group" focus-input="mobile">
+    <label for="inputPassword" class="col-sm-4 control-label ">Mobile</label>
+    <div class="col-sm-8" ng-hide="editing == 'mobile' " >
+      <p class="form-control-static">{{ options.mobile.value || '0000000000'}}</p>
+    </div>
+    <div class="col-sm-8" ng-show="editing == 'mobile' ">
+      <input ui-keypress="{13:'keypressCallback($event)'}" type="text" class="form-control inputSmall" ng-model="options.mobile.value" blur-input="mobile">
+    </div>
+  </div>
+  <div class="form-group" focus-input="fax">
+    <label for="inputPassword" class="col-sm-4 control-label">fax</label>
+    <div class="col-sm-8" ng-hide="editing == 'fax' " >
+      <p class="form-control-static ">{{ options.fax.value || '0000000000'}}</p>
+    </div>
+    <div class="col-sm-8" ng-show="editing == 'fax' ">
+      <input ui-keypress="{13:'keypressCallback($event)'}" type="text" class="form-control inputSmall" ng-model="options.fax.value" blur-input="fax">
+    </div>
+  </div>
+</form>
+<form  class="form-horizontal">
+  <div class="form-group" focus-input="adresse">
+    <label for="inputPassword" class="col-sm-4 control-label">Adresse</label>
+    <div class="col-sm-8" ng-hide="editing == 'adresse' ">
+      <p class="form-control-static">{{ options.adresse.value || "rue de l'exemple"}}</p>
+    </div>
+    <div class="col-sm-8" ng-show="editing == 'adresse' ">
+      <input ui-keypress="{13:'keypressCallback($event)'}" type="text" class="form-control inputMedium " ng-model="options.adresse.value" blur-input="adresse">
+    </div>
+  </div>
+  <div class="form-group" focus-input="cp">
+    <label for="inputPassword" class="col-sm-4 control-label">Code postal</label>
+    <div class="col-sm-8" ng-hide="editing == 'cp' ">
+      <p class="form-control-static">{{ options.cp.value  || 03400}}</p>
+    </div>
+    <div class="col-sm-8" ng-show="editing == 'cp' ">
+      <input ui-keypress="{13:'keypressCallback($event)'}" type="text" class="form-control inputSmall" ng-model="options.cp.value" blur-input="cp">
+    </div>
+  </div>
+  <div class="form-group" focus-input="ville">
+    <label for="inputPassword" class="col-sm-4 control-label">Ville</label>
+    <div class="col-sm-8"  ng-hide="editing == 'ville' ">
+      <p class="form-control-static">{{ options.ville.value || 'ExempleCity'}}</p>
+    </div>
+    <div class="col-sm-8" ng-show="editing == 'ville' ">
+      <input ui-keypress="{13:'keypressCallback($event)'}" type="text" class="form-control inputSmall" ng-model="options.ville.value" blur-input="ville">
+    </div>
+  </div>
+</form>
+<form  class="form-horizontal">
+  <div class="form-group" focus-input="fb">
+    <label for="inputPassword" class="col-sm-4  control-label">Url facebook</label>
+    <div class="col-sm-8 " ng-hide="editing == 'fb' ">
+      <p class="form-control-static">{{ options.fb.value || 'http://www.facebook.com/monprofile'}}</p>
+    </div>
+    <div class="col-sm-8" ng-show="editing == 'fb' ">
+      <input ui-keypress="{13:'keypressCallback($event)'}" type="text" class="form-control inputMedium" ng-model="options.fb.value" blur-input="fb">
+    </div>
+  </div>
+
+  <div class="form-group" focus-input="twitter">
+    <label for="inputPassword" class="col-sm-4  control-label">Url Twitter</label>
+    <div class="col-sm-8 " ng-hide="editing == 'twitter' ">
+      <p class="form-control-static">{{ options.twitter.value || 'http://www.twitter.com/monprofile'}}</p>
+    </div>
+    <div class="col-sm-8" ng-show="editing == 'twitter' ">
+      <input ui-keypress="{13:'keypressCallback($event)'}" type="text" class="form-control inputMedium" ng-model="options.twitter.value" blur-input="twitter">
+    </div>
+  </div>
+</form>
+<form class="form-horizontal">
+<p class="help-block">Centrer la carte sur la position souhaitée avec le zoom souhaité</p>
+  <div class="form-group" >
+    <label for="inputPassword" class="col-sm-4 control-label">Latitude</label>
+    <div class="col-sm-8">
+      <p class="form-control-static">{{ position.nb || 'N/A' }}</p>
+    </div>
+  </div>
+  <div class="form-group" >
+    <label for="inputPassword" class="col-sm-4 control-label">Longitude</label>
+    <div class="col-sm-8">
+      <p class="form-control-static">{{ position.ob || 'N/A'}}</p>
+    </div>
+  </div>
+  <div class="form-group" >
+    <label for="inputPassword" class="col-sm-4 control-label">Zoom</label>
+    <div class="col-sm-8">
+      <p class="form-control-static" style="display: inline-block;">{{ zoom || '3'}}</p>
+      <button class="btn btn-success" ng-click="saveMap()" style="margin-left:20px">Enregistrer la carte</button>
+    </div>
+  </div>
+  <div class="form-group saveMap" >
+    
+  </div>
+  <div class="form-group" >
+    <div id="map-canvas" style="height: 300px;">
+    </div>
+  </div>
+
+</form>
+</div>

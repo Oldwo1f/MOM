@@ -1,0 +1,57 @@
+<div ng-controller="imagesCtrl">
+	<div ng-controller="uploadCtrl"> 
+        <div class="tableaction  col-md-12 col-lg-12 pull-left">
+            <form enctype="multipart/form-data">
+                <div class="fileinput-button btn btn-success"> 
+                    <input type="file" name="imgs" ng-file-select="onFileSelect($files)"  multiple>
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Ajouter des images</span>
+                </div> 
+                <div ng-show="dropSupported" class="drop-box" ng-file-drop="onFileSelect($files);" ng-file-drop-available="dropSupported=true">Déposer des images ici</div>
+            </form>
+        </div>
+        <table id="uploadTable" ng-show="selectedFiles != null">
+            <tr class="uploadRow" ng-repeat="f in selectedFiles" ng-hide="f.hide">
+                <td>
+                    <img ng-show="dataUrls[$index]" ng-src="{{dataUrls[$index]}}" height="50">
+                </td>
+                <td>
+                    {{f.name | wrap}} 
+                </td>
+                <td>
+                    {{f.size | bytes}}
+                </td>
+                <td>
+                    <div ng-hide="f.error"class="progress progress-striped" ng-class="{active:hasUploader($index) && progress[$index] < 100}">
+                        <div ng-show="progress[$index] >= 0" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{{progress[$index]}}%">
+                            <span class="sr-only">{{progress[$index]}}%</span> {{progress[$index]}}%
+                        </div>
+                    </div>
+                    <div ng-show="f.error" class="label label-danger">{{ f.error }}</div>
+                </td>
+                <td>
+                   <!--  <button class="button" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Abort</button> -->
+                    <span ng-hide="hasUploader($index) && progress[$index] < 100">Terminé</span>
+                </td>       
+                
+                
+            </tr>
+        </table>
+        
+    </div>
+<h3>Mes images</h3>
+<p class="help-block">Double clicker sur un nom d'image pour le changer</p>
+    <div class="imggest row" >
+        <div  ng-repeat="image in images" class="col-sm-6 col-md-4 col-lg-4">
+            <div class="blockimg" ng-dblclick="dblclick($index,$event,$elem)">
+                <img ng-src="/uploads/thumb/{{image.name}}" height="90" width="auto">
+                <input type="text" ng-model="image.title" autofocus ui-keypress="{13:'keypressCallback($event)'}" ng-blur="editTitle($index)" ng-show="edit[$index]">
+                <p ng-hide="edit[$index]">{{image.title}}</p>
+                <button class='btn btn-default btn-danger' ng-hide="supprimerVerif[$index]" ng-click="suppVerif($index)" ng-disabled="disableOptions"><span class="glyphicon glyphicon-trash"></span>Supprimer</button>
+
+                        <button class='btn btn-danger' ng-show="supprimerVerif[$index]" ng-click="supprimer($index)" ng-disabled="disableOptions"> <span class="glyphicon glyphicon-trash"></span>Supprimer définitivement?</button>
+            </div>
+        </div> 
+    </div>
+
+</div>

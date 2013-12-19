@@ -45,30 +45,28 @@ module.exports = function(){
     }	
     console.log("... running fixtures ...");
     var newUser1 = {};
-        newUser1.username = 'yoda';
-        newUser1.email = 'alexismom@momcreation.fr'
-//ADD 2 User
-	encryptPassword('totototo', function(hashedpassword){
-        
+    encryptPassword('Lechatrosechope2rat', function(hashedpassword){
+        var newUser1 = {};
+        newUser1.username = 'alexismomcilovic';
+        newUser1.type = 'superadmin';
+        newUser1.email = 'alexismomcilovic@momcreation.fr'
         newUser1.password = hashedpassword;
 
-        userDal.save(newUser1, function (data) { 
-
-        	console.log(data); 
-        	newUser1 = data;
-        });
+        userDal.save(newUser1, function (data) { });
     });
-    encryptPassword('totototo', function(hashedpassword){
+    encryptPassword('alexis09', function(hashedpassword){
         var newUser = {};
         newUser.username = 'alexis';
-        newUser.email = 'alexismomcilovic@momcreation.fr'
+        newUser.type = 'utilisateur';
+        newUser.email = 'toto@momcreation.fr'
         newUser.password = hashedpassword;
 
-        userDal.save(newUser, function (data) { });
+        userDal.save(newUser, function (data) {});
     });
-    encryptPassword('totototo', function(hashedpassword){
+    encryptPassword('adminadmin', function(hashedpassword){
         var newUser = {};
-        newUser.username = 'toto';
+        newUser.username = 'admin';
+        newUser.type = 'admin';
         newUser.email = 'toto@momcreation.fr'
         newUser.password = hashedpassword;
 

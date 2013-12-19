@@ -122,7 +122,8 @@ var async             = require('async');
                     encryptPassword(req.body.password, function(hashedpassword){
                         var newUser = {};
                         newUser.username = req.body.username;
-                        newUser.email = req.body.email
+                        newUser.email = req.body.email;
+                        newUser.type = 'utilisateur';
                         newUser.password = hashedpassword;
 
                         userDal.save(newUser, function (data) {

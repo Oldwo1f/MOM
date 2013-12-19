@@ -48,7 +48,7 @@ var DbContext = require('../../db/dbContext');
      */
     livredorDAL.prototype.save = function(livredor, callback) {
         var livredor = dbContext.livredor.build(livredor);
-        livredor.livredor.save().success(function(livredor) {
+        livredor.save().success(function(livredor) {
             callback(livredor);
         }).error(function(error) {
             callback({message: error});

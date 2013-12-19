@@ -93,8 +93,8 @@
 							</th>
 							<th>Nom <i class="fa fa-sort"></i></th>
 							<th>Description <i class="fa fa-sort"></i></th>
-							<th>Dernière modif<i class="fa fa-sort"></i></th>
-							<th style="width: 170px;">Images <i class="fa fa-sort"></i></th>
+							<th style="width: 121px;">Dernière modif<i class="fa fa-sort"></i></th>
+							<th style="width: 195px;">Images <i class="fa fa-sort"></i></th>
 						 </tr>
 					</thead>
 					<tbody>
@@ -111,7 +111,7 @@
 							<img  ng-repeat="image in project.images | limitTo:4"  ng-src="/uploads/miniThumb/{{image.name}}" width="30px" height="30px">
 							
 							<!--  -->
-							<small ng-show="project.images.length-4 > 0">+{{ project.images.length - 4 }}</small>
+							<small class="badge"ng-show="project.images.length-4 > 0">+{{ project.images.length - 4}}</small>
 							<div ng-hide="project.images.length" class="btn" ng-click="closeLightBox(); checkAll(true); project.selected=true; editImage(project)">Ajouter des images</div>
 						</td>
 					  </tr>

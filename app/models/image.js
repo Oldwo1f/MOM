@@ -9,7 +9,9 @@ module.exports = function (db, DataTypes) {
 			
 				url: DataTypes.STRING,
 
-				title: DataTypes.STRING
+				title: DataTypes.STRING,
+
+				mainSlider: DataTypes.BOOLEAN,
 			
 		
 	});

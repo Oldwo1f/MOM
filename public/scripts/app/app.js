@@ -24,6 +24,9 @@ var app = angular.module('adminApp', ['ngRoute','angularFileUpload','uiKeypress'
  
   $routeProvider.when('/livredor', {
     templateUrl: '/livredor',
+  }); 
+  $routeProvider.when('/', {
+    templateUrl: '/dashboard',
   });
  
 });

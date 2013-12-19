@@ -33,6 +33,7 @@ var MembershipFilters = require('../../middleware/membershipFilters');
         app.get('/article',filters.authorize, this.article);
         app.get('/settings',filters.authorize, this.settings);
         app.get('/livredor',filters.authorize, this.livredor);
+        app.get('/dashboard',filters.authorize, this.dashboard);
     };
 
     /**
@@ -72,6 +73,10 @@ var MembershipFilters = require('../../middleware/membershipFilters');
 
  HomeController.prototype.livredor = function(req, res) {
         res.render('livredor/livredor');
+    };
+
+ HomeController.prototype.dashboard = function(req, res) {
+        res.render('shared/dashboard');
     };
 
 

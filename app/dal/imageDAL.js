@@ -2,6 +2,7 @@
  * module dependencies
  */
 var DbContext = require('../../db/dbContext');
+var async = require('async');
 
 /**
 * imageDAL class
@@ -38,6 +39,47 @@ var DbContext = require('../../db/dbContext');
     imageDAL.prototype.getAll = function(callback) {
         dbContext.image.findAll({order: 'id DESC'}).success(function(images) {
             callback(images);
+        });
+    };
+    /**
+     * get all image
+     * @param  {Function} callback
+     */
+    imageDAL.prototype.getAllWithProj = function(callbackk) {
+        dbContext.image.findAll({order: 'id DESC'}).success(function(images) {
+            
+            async.map(images,function(image,cb) {
+                image.getProjects().success(function(projects) {
+                    // console.log(projects); 
+                    image.projects = JSON.stringify(projects);
+                    // console.log(image); 
+                    cb(null,JSON.stringify(projects));
+                })
+            },function(err,results) {
+               if(err) console.log(err); 
+               else{
+                    for(var i in images)
+                    {
+                        // console.log('__________________________________'+i); 
+                        // console.log(results[i]); 
+                       // if(i==3){console.log(images[i]);} 
+                        // images[i].dataValues.projects = '';
+
+                        images[i].url = JSON.parse(results[i]);
+                        // if(i==3){console.log(images[i]);} 
+                        // console.log(images); 
+                       
+                    }
+                     callbackk(images);
+               }
+                
+                
+            });
+
+
+
+
+
         });
     };
 
@@ -81,33 +123,47 @@ var DbContext = require('../../db/dbContext');
             });
         })
     };
-    imageDAL.prototype.sync = function(callback) { 
-        // var img = {name:'toto',title:"tata"};
-        // var image = dbContext.image.build(img);
-        // var proj = {};
-        // proj.name = 'Mon premier projet';
-        // proj.description = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
-        // var project = dbContext.project.build(proj);
+    imageDAL.prototype.linkProj = function(projId,imageId,callback) { 
         
+        async.parallel({
+            img : function(callback){
+               dbContext.image.find(imageId).success(function(img) {
+                    callback(null,img)
+                });
+            },
+            proj:function(callback){
+                dbContext.project.find(projId).success(function(proj) {
+                    callback(null,proj)
+                });
+            }
+        },
+        function(err, results){
+            results.proj.addImage(results.img).success(function() {
+                console.log('sucessSet');
+                callback();
+            })
+        });
+    };
+    imageDAL.prototype.unlinkProj = function(projId,imageId,callback) { 
         
-        // image.save().success(function(image) {
-            
-        // }).error(function(error) {
-        //     callback({message: error});
-        // });
-
-        // project.save().success(function(image) {
-        //     callback(image);
-        // }).error(function(error) {
-        //     callback({message: error});
-        // });
-
-        // // project.setImages([image]).success(function() {
-        // //     console.log('sucess'); 
-        // // })
-        
-
-
+        async.parallel({
+            img : function(callback){
+               dbContext.image.find(imageId).success(function(img) {
+                    callback(null,img)
+                });
+            },
+            proj:function(callback){
+                dbContext.project.find(projId).success(function(proj) {
+                    callback(null,proj)
+                });
+            }
+        },
+        function(err, results){
+            results.proj.removeImage(results.img).success(function() {
+                console.log('sucessSet');
+                callback();
+            })
+        });
     };
 
     module.exports = imageDAL;

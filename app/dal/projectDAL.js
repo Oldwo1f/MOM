@@ -2,6 +2,7 @@
  * module dependencies
  */
 var DbContext = require('../../db/dbContext');
+var async = require('async');
 
 /**
 * projectDAL class
@@ -37,7 +38,29 @@ var DbContext = require('../../db/dbContext');
      */
     projectDAL.prototype.getAll = function(callback) {
         dbContext.project.findAll({order: 'id DESC'}).success(function(projects) {
-            callback(projects);
+            // callback(projects);
+            async.map(projects,function(project,callback) {
+
+                project.getImages().success(function(images) {
+                    // console.log(projects); 
+                    // project.UserId = JSON.stringify(images);
+                    // project.yop = ['yop'];
+                    // console.log(image);
+
+                    callback(null,images);
+                })
+            },function(err,results) {
+               if(err) console.log(err); 
+               else{
+                    for(var i in results)
+                    {
+                        projects[i] =projects[i].toJSON();
+                        projects[i].images = results[i];
+                    }
+                     callback(projects);
+               } 
+            })
+
         });
     };
 

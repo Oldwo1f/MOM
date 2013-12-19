@@ -10,6 +10,7 @@
 					<div class="tableaction  col-md-6 col-lg-6 pull-left">
 						<button class='btn btn-default btn-success' ng-click="lightboxAddProject =true;"><span class="glyphicon glyphicon-plus"></span> Ajouter</button>
 						<button class='btn btn-default btn-primary' ng-click="editPage()" ng-disabled="nbChecked != 1"><span class="glyphicon glyphicon-edit"></span> Modifier</button>
+						<button class='btn btn-default btn-primary' ng-click="editImage()" ng-disabled="nbChecked != 1"><span class="glyphicon glyphicon-picture"></span> Modifier les image</button>
 						<button class='btn btn-default btn-danger' ng-hide="supprimerVerif" ng-click="suppVerif()" ng-disabled="disableOptions"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
 						<button class='btn btn-danger' ng-show="supprimerVerif" ng-click="supprimer()" ng-disabled="disableOptions"> <span class="glyphicon glyphicon-trash"></span>Supprimer définitivement?</button>
 						<div class="nbselected ">
@@ -48,12 +49,43 @@
 			                <label for="description">Description</label>
 			                <textarea type="text" class="form-control" id="description" name="description" placeholder="Entrez votre description"  rows="7" ng-model="editProjectInputDescription"></textarea>
 			            </div>
+			            
+			            
+
+			            
 			           
 						<div class="handleErrors"></div>
 						<button type="submit" class="btn btn-default" >Submit</button>
 					</form>
+				</div>				
+				<div class="lightbox col-md-8 col-lg-8 " ng-show="lightboxImageProject">
+					<button type="button" class="close" ng-click="lightboxImageProject = false; closeLightBox()">×</button>
+					<div class="form-group col-xs-4 projectImgs" >
+			                <label for="description">Images du projet</label>
+			                <div class="projImgs">
+								<img ng-repeat="image in projimages" title="{{image.title}}"ng-src="/uploads/miniThumb/{{image.name}}" ng-click="selectImg(image)" ng-class="{selected: image.selected}">
+								
+							</div>
+							<div class="transfert">
+				            	<div class="btn" ng-click="link()"><span class="glyphicon glyphicon-circle-arrow-left"></span></div>
+				            	<div class="btn" ng-click="unlink()"><span class="glyphicon glyphicon-circle-arrow-right"></span></div>
+				            </div>
+						</div>
+						<div class="form-group col-xs-8 chooseImgs" >
+							<label for="description">Choisir des images</label>
+							<div class="btn-group btn-group-xs">
+							  	<button type="button" class="btn btn-default" ng-class="{selected : tri=='all'}" ng-click="filtering('all')">Toutes</button>
+							  	<button type="button" class="btn btn-default selected" ng-class="{selected : tri=='free'}" ng-click="filtering('free')">Libres</button>
+							  	<button type="button" class="btn btn-default" ng-class="{selected : tri=='use'}" ng-click="filtering('use')">Utilisées</button>
+							</div>
+							<div class="projImgs">
+								<img ng-repeat="image in imageToShow" title="{{image.title}}"ng-src="/uploads/miniThumb/{{image.name}}" ng-click="selectImg(image)" ng-class="{selected: image.selected}">
+								
+							</div>
+			            </div>
+			            <button ng-click="lightboxImageProject = false; closeLightBox()" class="btn btn-default" >Terminer</button>
 				</div>
-			  	<table class="table table-bordered table-hover tablesorter">
+			  	<table class="table table-bordered table-hover tablesorter tableProject">
 					<thead>
 						<tr>
 							<th style="width: 30px;">
@@ -62,24 +94,25 @@
 							<th>Nom <i class="fa fa-sort"></i></th>
 							<th>Description <i class="fa fa-sort"></i></th>
 							<th>Dernière modif<i class="fa fa-sort"></i></th>
-							<th>Images <i class="fa fa-sort"></i></th>
+							<th style="width: 170px;">Images <i class="fa fa-sort"></i></th>
 						 </tr>
 					</thead>
 					<tbody>
 						<tr class="chargement" ng-hide="chargementTerminer">
 							<td colspan="4">Chargement . . .</td>
 						</tr>
-					  <tr ng-repeat="project in projects"  ng-class="{selectedRow: project.selected}" ng-dblclick="checkAll(true);project.selected = true; editPage() ">
+					  <tr ng-repeat="project in projects"  ng-class="{selectedRow: project.selected}" >
 
-						<td><input type="checkbox" ng-model="project.selected"></td>
-						<td>{{ project.name }}</td>
-						<td>{{ project.description | wrap }}</td>
-						<td>{{ project.updatedAt | date:'dd/MM/yyyy' }}</td>
-						<td>
-							<img src="" width="30px" height="30px">
-							<img src="" width="30px" height="30px">
-							<img src="" width="30px" height="30px">
-							<img src="" width="30px" height="30px">
+						<td ng-dblclick="closeLightBox(); checkAll(true);project.selected = true; editPage() "><input type="checkbox" ng-model="project.selected"></td>
+						<td ng-dblclick="closeLightBox(); checkAll(true);project.selected = true; editPage() ">{{ project.name }}</td>
+						<td ng-dblclick="closeLightBox(); checkAll(true);project.selected = true; editPage() ">{{ project.description | wrap }}</td>
+						<td ng-dblclick="closeLightBox(); checkAll(true);project.selected = true; editPage() ">{{ project.updatedAt | date:'dd/MM/yyyy' }}</td>
+						<td ng-dblclick="closeLightBox(); checkAll(true); project.selected=true; editImage(project)">
+							<img  ng-repeat="image in project.images | limitTo:4"  ng-src="/uploads/miniThumb/{{image.name}}" width="30px" height="30px">
+							
+							<!--  -->
+							<small ng-show="project.images.length-4 > 0">+{{ project.images.length - 4 }}</small>
+							<div ng-hide="project.images.length" class="btn" ng-click="closeLightBox(); checkAll(true); project.selected=true; editImage(project)">Ajouter des images</div>
 						</td>
 					  </tr>
 					  

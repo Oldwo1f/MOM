@@ -77,3 +77,14 @@ h3{}
 .tableLivredor th:first-child + th + th + th{}
 .tableLivredor th:first-child + th + th + th +th{max-width : 100px;}
 table p {margin-bottom:0px;}
+
+.projImgs{ border : 1px solid grey; min-height : 110px;}
+.projImgs img {width : 50px; height : 50px;margin: 2px;border : 5px white solid;}
+.projImgs img.selected {border : 3px yellow solid;}
+.transfert{position: absolute;right: -30px;width: 50px;height: 50px;margin-top: 30px;top: 20px;}
+.btn-group .selected{font-weight:bold;}
+.close {position: absolute;right: 10px;}
+.projectImgs{margin-top: 20px}
+.chooseImgs{margin-top: 20px}
+.tableProject tbody tr td{vertical-align: middle;}
+.tableProject img{margin-left : 3px;}

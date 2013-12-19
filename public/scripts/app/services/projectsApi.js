@@ -15,6 +15,14 @@ app.factory('projectsApi', ['$http',function ($http) {
             return data.data;
         });
         return promise;
+    }; 
+    service.count = function(proj) {
+
+        var promise = $http.get('/api/project/count').
+        then(function(data, status, headers, config) {
+            return data.data;
+        });
+        return promise;
     };
     service.editProject = function(proj) {
 

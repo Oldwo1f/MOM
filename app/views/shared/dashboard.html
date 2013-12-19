@@ -4,7 +4,7 @@
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
               Bonjour. Petit Message d'accueil
 </div>
-<div class="row dashboard">
+<div class="row dashboard" ng-controller="dashboardCtrl">
           <div class="col-sm-3">
             <div class="panel panel-info">
               <div class="panel-heading">
@@ -13,8 +13,8 @@
                     <span class="glyphicon bigGlyphicon glyphicon-th-large"></span>
                   </div>
                   <div class="col-xs-6 text-right">
-                    <p class="announcement-heading">456</p>
-                    <p class="announcement-text">Projets</p>
+                    <p class="announcement-heading">{{ nbProject }}</p>
+                    <p class="announcement-text"><ng-pluralize count="nbProject"  when="{'0': 'Project','1': 'Project','other': 'Projects'}"></ng-pluralize></p>
                   </div>
                 </div>
               </div>
@@ -22,7 +22,7 @@
                 <div class="panel-footer announcement-bottom">
                   <div class="row">
                     <div class="col-xs-12">
-                      Voir les projets
+                      <ng-pluralize count="nbProject"  when="{'0': 'Ajouter un premier projet','1': 'Ajouter d\'autre projets','other': 'Voir les projets'}"> </ng-pluralize>
                     </div>
                   </div>
                 </div>
@@ -37,8 +37,8 @@
                     <span class="glyphicon bigGlyphicon glyphicon-align-center"></span>
                   </div>
                   <div class="col-xs-6 text-right">
-                    <p class="announcement-heading">12</p>
-                    <p class="announcement-text">Article</p>
+                    <p class="announcement-heading">{{ nbArticle }}</p>
+                    <p class="announcement-text"><ng-pluralize count="nbArticle"  when="{'0': 'Article','1': 'Article','other': 'Articles'}"> </ng-pluralize></p>
                   </div>
                 </div>
               </div>
@@ -46,7 +46,7 @@
                 <div class="panel-footer announcement-bottom">
                   <div class="row">
                     <div class="col-xs-12">
-                      Voir les articles
+                      <ng-pluralize count="nbArticle"  when="{'0': 'Ajouter un premier article','1': 'Ajouter d\'autre articles','other': 'Voir les articles'}"> </ng-pluralize>
                     </div>
                     
                   </div>
@@ -62,8 +62,8 @@
                     <span class="glyphicon bigGlyphicon glyphicon-picture"></span>
                   </div>
                   <div class="col-xs-6 text-right">
-                    <p class="announcement-heading">18</p>
-                    <p class="announcement-text">Images</p>
+                    <p class="announcement-heading">{{ nbImage }}</p>
+                    <p class="announcement-text"><ng-pluralize count="nbImage"  when="{'0': 'Image','1': 'Image','other': 'Images'}"> </ng-pluralize></p>
                   </div>
                 </div>
               </div>
@@ -83,11 +83,11 @@
               <div class="panel-heading">
                 <div class="row">
                   <div class="col-xs-6">
-                    <span class="glyphicon bigGlyphicon glyphicon-user"></span>
+                    <span class="glyphicon bigGlyphicon glyphicon-comment"></span>
                   </div>
                   <div class="col-xs-6 text-right">
-                    <p class="announcement-heading">6</p>
-                    <p class="announcement-text">Utilisateur</p>
+                    <p class="announcement-heading">{{ nbLivredor }}</p>
+                    <p class="announcement-text"><ng-pluralize count="nbLivredor"  when="{'0': 'Avis','1': 'Avis','other': 'Avis'}"> </ng-pluralize></p>
                   </div>
                 </div>
               </div>
@@ -95,7 +95,8 @@
                 <div class="panel-footer announcement-bottom">
                   <div class="row">
                     <div class="col-xs-12">
-                      Voir les utilisateurs
+                    	<ng-pluralize count="nbLivredor"  when="{'0': 'Aucun','1':'Voir l\' avis utilisateurs','other': 'Voir les avis utilisateurs'}"> </ng-pluralize>
+                      
                     </div>
                   </div>
                 </div>
@@ -118,6 +119,8 @@
 	           			<li>Amélioration du système d'upload d'image.</li>
 	           			<li>Mise en place un systeme de resize d'image.</li>
 	           			<li>Mise en place avancé de gestion des droits utilisateur</li>
+	           			<li>Mise en place de graphique résumant la fréquentation du site</li>
+	           			<li>Et pleins d'autres choses encore. (faite moi part de vos besoins)</li>
 	           		</ul>
             	</div>
             </div>

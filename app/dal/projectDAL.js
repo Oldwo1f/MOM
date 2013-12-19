@@ -31,6 +31,13 @@ var async = require('async');
             callback(project);
         });
     };
+    projectDAL.prototype.countAll = function(callback) {
+        dbContext.project.count().success(function(nb) {
+            console.log('DAL'); 
+            console.log(nb); 
+            callback(nb);
+        });
+    };
 
     /**
      * get all project

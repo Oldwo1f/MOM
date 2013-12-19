@@ -29,6 +29,7 @@ var async      = require('async');
     */
     projectApiController.prototype.routes = function(app) {
         app.get('/api/project', this.getAll);
+        app.get('/api/project/count', this.countAll );
         app.get('/api/project/:id', this.get);
         app.post('/api/project', this.post);
         app.put('/api/project', this.put);
@@ -44,6 +45,14 @@ var async      = require('async');
     projectApiController.prototype.getAll = function(req, res) {
         projectDAL.getAll(function (projects) {
             res.send(projects);
+        });
+    };
+    projectApiController.prototype.countAll = function(req, res) {
+        console.log('here'); 
+        projectDAL.countAll(function (nb) {
+            console.log('countALL'); 
+            console.log(nb); 
+            res.send(String(nb));
         });
     };
 

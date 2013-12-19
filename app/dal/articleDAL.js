@@ -29,6 +29,12 @@ var DbContext = require('../../db/dbContext');
         dbContext.article.find(articleId).success(function(article) {
             callback(article);
         });
+    };    
+    articleDAL.prototype.count = function(callback) {
+        dbContext.article.count().success(function(nb) {
+            console.log( nb ); 
+            callback(nb);
+        });
     };
 
     /**

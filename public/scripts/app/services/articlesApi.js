@@ -9,6 +9,16 @@ app.factory('articlesApi', ['$http',function ($http) {
         });
         return promise;
     };
+    service.count = function() {
+        console.log('count'); 
+        var promise = $http.get('/api/article/count').
+        then(function(data, status, headers, config) {
+            console.log(data.data);
+            return data.data;
+        });
+        console.log('return'); 
+        return promise;
+    };
     service.addArticle = function(proj) {
 
         var promise = $http.post('/api/article',proj).

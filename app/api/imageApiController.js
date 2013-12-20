@@ -35,6 +35,7 @@ var async = require('async');
     */
     ImageApiController.prototype.routes = function(app) {
         app.get('/api/image', this.getAll);
+        app.get('/api/image/count', this.countAll);
         app.get('/api/image/getAllWithProj', this.getAllWithProj);
         app.get('/api/image/:id', this.get);
         app.post('/api/image', this.post);
@@ -44,7 +45,12 @@ var async = require('async');
         app.put('/api/image/unlinkProj', this.unlinkProj);
         app.post('/api/image/remove', this.delete);
     };
-
+    ImageApiController.prototype.countAll = function(req, res) {
+        imageDAL.count(function (nb) {
+            console.log(nb); 
+            res.send(String(nb));
+        });
+    };
     /**
     * [httppost]
     * ImageApiController upload action.

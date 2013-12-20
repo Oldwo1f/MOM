@@ -31,6 +31,12 @@ var async = require('async');
             callback(image);
         });
     };
+    imageDAL.prototype.count = function(callback) {
+        dbContext.image.count().success(function(nb) {
+            console.log( nb ); 
+            callback(nb);
+        });
+    };
 
     /**
      * get all image

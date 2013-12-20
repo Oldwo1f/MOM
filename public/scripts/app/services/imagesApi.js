@@ -57,7 +57,16 @@ app.factory('imagesApi', ['$http',function ($http) {
         });
         return promise;
     };
-    
+    service.count = function() {
+        console.log('count'); 
+        var promise = $http.get('/api/image/count').
+        then(function(data, status, headers, config) {
+            console.log(data.data);
+            return data.data;
+        });
+        console.log('return'); 
+        return promise;
+    };
 
 
 

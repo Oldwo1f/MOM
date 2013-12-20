@@ -40,6 +40,12 @@ var DbContext = require('../../db/dbContext');
             callback(livredors);
         });
     };
+    livredorDAL.prototype.count = function(callback) {
+        dbContext.livredor.count().success(function(nb) {
+            console.log( nb ); 
+            callback(nb);
+        });
+    };
 
     /**
      * save livredor

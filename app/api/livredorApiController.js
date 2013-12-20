@@ -30,6 +30,7 @@ var async      = require('async');
     */
     LivredorApiController.prototype.routes = function(app) {
         app.get('/api/livredor', this.getAll);
+        app.get('/api/livredor/count', this.countAll);
         app.get('/api/livredor/:id', this.get);
         app.post('/api/livredor', this.post);
         app.put('/api/livredor', this.put);
@@ -45,6 +46,12 @@ var async      = require('async');
     LivredorApiController.prototype.getAll = function(req, res) {
         livredorDAL.getAll(function (livredors) {
             res.send(livredors);
+        });
+    };
+    LivredorApiController.prototype.countAll = function(req, res) {
+        livredorDAL.count(function (nb) {
+            console.log(nb); 
+            res.send(String(nb));
         });
     };
 

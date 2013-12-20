@@ -41,6 +41,7 @@ function articleCtrl($scope, articlesApi, filterFilter, $timeout) {
 		var proj={};
 		proj.title= $scope.newArticleInputName;
 		proj.content= $scope.newArticleInputDescription;
+		proj.urlFB= $scope.newArticleInputUrlFB;
 		articlesApi.addArticle(proj).then(function(data) {
 		    $scope.articles.push(data);
 		    console.log(data); 
@@ -56,6 +57,7 @@ function articleCtrl($scope, articlesApi, filterFilter, $timeout) {
 		$scope.indexToReplace = $scope.articles.indexOf($scope.articleToEdit); 
 		$scope.editArticleInputName = $scope.articleToEdit.title;
 		$scope.editArticleInputDescription = $scope.articleToEdit.content;
+		$scope.editArticleInputUrlFB = $scope.articleToEdit.urlFB;
 		$scope.IDArticleToEdit = $scope.articleToEdit.id;
 	};
 	$scope.editArticle=function() {
@@ -63,6 +65,7 @@ function articleCtrl($scope, articlesApi, filterFilter, $timeout) {
 		proj.title = $scope.editArticleInputName; 
 		proj.content = $scope.editArticleInputDescription;
 		proj.id = $scope.IDArticleToEdit;
+		proj.urlFB = $scope.editArticleInputUrlFB;
 		console.log(proj); 
 		articlesApi.editArticle(proj).then(function(data) {
 		    

@@ -30,6 +30,10 @@
 			                <label for="description">Contenu</label>
 			                <textarea type="text" class="form-control" id="description" name="description" placeholder="Entrez votre description"  rows="7" ng-model="newArticleInputDescription"></textarea>
 			            </div>
+			            <div class="form-group" rel="urlFB">
+			                <label for="urlFB">Url facebook</label>
+			                <input type="text" class="form-control" name="urlFB" placeholder="Entrez l'url facebook de votre article" ng-model="newArticleInputUrlFB"required>
+			            </div>
 			           
 						<div class="handleErrors"></div>
 						<button type="submit" class="btn btn-default" >Submit</button>
@@ -47,6 +51,10 @@
 			           <div class="form-group" rel="description">
 			                <label for="description">Description</label>
 			                <textarea type="text" class="form-control" id="description" name="description" placeholder="Entrez votre description"  rows="7" ng-model="editArticleInputDescription"></textarea>
+			            </div>
+			            <div class="form-group" rel="name">
+			                <label for="name">Url facebook</label>
+			                <input type="text" class="form-control" name="urlFB" placeholder="Entrez l'url facebook de votre article" ng-model="editArticleInputUrlFB"required>
 			            </div>
 			           
 						<div class="handleErrors"></div>

@@ -81,7 +81,7 @@ table p {margin-bottom:0px;}
 .projImgs{ border : 1px solid grey; min-height : 110px;}
 .projImgs img {width : 50px; height : 50px;margin: 2px;border : 5px white solid;}
 .projImgs img.selected {border : 3px yellow solid;}
-.transfert{position: absolute;right: -30px;width: 50px;height: 50px;margin-top: 30px;top: 20px;}
+.transfert{z-index:10;position: absolute;right: -30px;width: 50px;height: 50px;margin-top: 30px;top: 20px;}
 .btn-group .selected{font-weight:bold;}
 .close {position: absolute;right: 10px;}
 .projectImgs{margin-top: 20px}
@@ -89,3 +89,5 @@ table p {margin-bottom:0px;}
 .tableProject tbody tr td{vertical-align: middle;}
 .tableProject img{margin-left : 3px;}
 .bigGlyphicon{ font-size:5em;}
+.viseur{position:absolute;width:100px;height:100px;top: 100px; margin-left:-50px;left : 50%;background: url('../images/viseur.png'); z-index: 1;}
+#logo{width : 100px; height : 35px;margin-left: 15px; margin-top: 8px;background : url('../images/logoligne.png');}

@@ -70,8 +70,9 @@ app.controller('settingsCtrl',['$scope','filterFilter','$timeout','settingsApi',
 		parseInt($scope.zoom); 
 	  var mapOptions = {
 	    zoom: parseInt($scope.zoom),
-	    center: $scope.position
-	  };
+	    center: $scope.position,
+	    scrollwheel: false
+	     };
 
 	  map = new google.maps.Map(document.getElementById('map-canvas'),
 	      mapOptions);

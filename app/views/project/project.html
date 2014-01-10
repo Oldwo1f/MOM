@@ -7,7 +7,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="tableheader">
-					<div class="tableaction  col-md-6 col-lg-6 pull-left">
+					<div class="tableaction  col-md-12 col-lg-12 pull-left">
 						<button class='btn btn-default btn-success' ng-click="lightboxAddProject =true;"><span class="glyphicon glyphicon-plus"></span> Ajouter</button>
 						<button class='btn btn-default btn-primary' ng-click="editPage()" ng-disabled="nbChecked != 1"><span class="glyphicon glyphicon-edit"></span> Modifier</button>
 						<button class='btn btn-default btn-primary' ng-click="editImage()" ng-disabled="nbChecked != 1"><span class="glyphicon glyphicon-picture"></span> Modifier les image</button>
@@ -83,7 +83,9 @@
 								
 							</div>
 			            </div>
-			            <button ng-click="lightboxImageProject = false; closeLightBox()" class="btn btn-default" >Terminer</button>
+			            <div class="form-group col-xs-8 chooseImgs" >
+			            	<button ng-click="lightboxImageProject = false; closeLightBox()" class="btn btn-default" >Terminer</button>
+			        	</div>
 				</div>
 			  	<table class="table table-bordered table-hover tablesorter tableProject">
 					<thead>

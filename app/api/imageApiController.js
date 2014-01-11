@@ -37,12 +37,15 @@ var async = require('async');
         app.get('/api/image', this.getAll);
         app.get('/api/image/count', this.countAll);
         app.get('/api/image/getAllWithProj', this.getAllWithProj);
+        app.get('/api/image/getAllWithArticle', this.getAllWithArticle);
         app.get('/api/image/:id', this.get);
         app.post('/api/image', this.post);
         app.post('/upload/image', this.upload);
         app.put('/api/image', this.put);
         app.put('/api/image/linkProj', this.linkProj);
         app.put('/api/image/unlinkProj', this.unlinkProj);
+        app.put('/api/image/linkArticle', this.linkArticle);
+        app.put('/api/image/unlinkArticle', this.unlinkArticle);
         app.post('/api/image/remove', this.delete);
     };
     ImageApiController.prototype.countAll = function(req, res) {
@@ -138,6 +141,14 @@ console.log(req.files.myFile.type.indexOf('image'));
     */
     ImageApiController.prototype.getAllWithProj = function(req, res) {
         imageDAL.getAllWithProj(function (images) {
+            // console.log('----------'); 
+            // console.log(images); 
+            res.send(images);
+        });
+    };  
+    ImageApiController.prototype.getAllWithArticle = function(req, res) {
+        console.log('here Article'); 
+        imageDAL.getAllWithArticle(function (images) {
             // console.log('----------'); 
             // console.log(images); 
             res.send(images);
@@ -240,6 +251,65 @@ console.log(req.files.myFile.type.indexOf('image'));
         // console.log(images); 
         async.map(images,function(image,callback) {
             imageDAL.unlinkProj(projId,image.id, function(d) {
+                callback();
+            })
+            
+        },function(err) {
+            console.log('finito'); 
+            if(err) console.log('err');
+
+            res.end('success')
+
+
+        });
+
+
+    };
+
+    /**
+    * [httpput]
+    * ImageApiController linkProj  action.
+    * @param {req} http request.
+    * @param {res} http response.
+    */
+    ImageApiController.prototype.linkArticle = function(req, res) {
+        
+        // console.log(req.body); 
+        var projId = req.body.proj.id;
+        var images = req.body.images;
+        // console.log(projId); 
+        // console.log(images); 
+        async.map(images,function(image,callback) {
+            imageDAL.linkArticle(projId,image.id, function(d) {
+                callback();
+            })
+            
+        },function(err) {
+            console.log('finito'); 
+            if(err) console.log('err');
+
+            res.end('success')
+
+
+        });
+
+
+    };
+    /**
+    * [httpput]
+    * ImageApiController unlinkProj  action.
+    * @param {req} http request.
+    * @param {res} http response.
+    */
+    ImageApiController.prototype.unlinkArticle = function(req, res) {
+        
+        // console.log(req.body); 
+        var projId = req.body.proj.id;
+        var images = req.body.images;
+        // console.log(projId); 
+        // console.log(images); 
+        async.map(images,function(image,callback) {
+            imageDAL.unlinkArticle(projId,image.id, function(d) {
                 callback();
             })
             

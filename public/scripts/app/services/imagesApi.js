@@ -14,6 +14,13 @@ app.factory('imagesApi', ['$http',function ($http) {
             return data.data;
         });
         return promise;
+    };    
+    service.getAllWithArticle = function() {
+        var promise = $http.get('/api/image/getAllWithArticle').
+        then(function(data, status, headers, config) {
+            return data.data;
+        });
+        return promise;
     };
     service.addImages = function(proj) {
 
@@ -42,6 +49,22 @@ app.factory('imagesApi', ['$http',function ($http) {
     service.unlinkToProj = function(proj,images) {
 
         var promise = $http.put('/api/image/unlinkProj',{proj:proj, images:images}).
+        then(function(data, status, headers, config) {
+            return data.data;
+        });
+        return promise;
+    };
+    service.linkToArticle = function(proj,images) {
+
+        var promise = $http.put('/api/image/linkArticle',{proj:proj, images:images}).
+        then(function(data, status, headers, config) {
+            return data.data;
+        });
+        return promise;
+    };
+    service.unlinkToArticle = function(proj,images) {
+
+        var promise = $http.put('/api/image/unlinkArticle',{proj:proj, images:images}).
         then(function(data, status, headers, config) {
             return data.data;
         });

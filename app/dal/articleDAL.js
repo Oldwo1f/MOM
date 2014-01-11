@@ -2,7 +2,7 @@
  * module dependencies
  */
 var DbContext = require('../../db/dbContext');
-
+var async = require('async');
 /**
 * articleDAL class
 */
@@ -43,7 +43,30 @@ var DbContext = require('../../db/dbContext');
      */
     articleDAL.prototype.getAll = function(callback) {
         dbContext.article.findAll({order: 'id DESC'}).success(function(articles) {
-            callback(articles);
+                // callback(projects);
+            async.map(articles,function(project,callback) {
+
+                project.getImages().success(function(images) {
+                    // console.log(projects); 
+                    // project.UserId = JSON.stringify(images);
+                    // project.yop = ['yop'];
+                    // console.log(image);
+
+                    callback(null,images);
+                })
+            },function(err,results) {
+               if(err) console.log(err); 
+               else{
+                    for(var i in results)
+                    {
+                        articles[i] =articles[i].toJSON();
+                        articles[i].images = results[i];
+                    }
+                     callback(articles);
+                     callback(articles);
+               } 
+            })
+
         });
     };
 

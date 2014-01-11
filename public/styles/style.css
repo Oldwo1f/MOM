@@ -88,6 +88,10 @@ table p {margin-bottom:0px;}
 .chooseImgs{margin-top: 20px}
 .tableProject tbody tr td{vertical-align: middle;}
 .tableProject img{margin-left : 3px;}
+.tableArticle tbody tr td{vertical-align: middle;}
+.tableArticle img{margin-left : 3px;}
 .bigGlyphicon{ font-size:5em;}
 .viseur{position:absolute;width:100px;height:100px;top: 100px; margin-left:-50px;left : 50%;background: url('../images/viseur.png'); z-index: 1;}
 #logo{width : 100px; height : 35px;margin-left: 15px; margin-top: 8px;background : url('../images/logoligne.png');}
+.addimgLink{color:blue;font-size : 10px;}
+.addimgLink:hover{text-decoration: underline;}

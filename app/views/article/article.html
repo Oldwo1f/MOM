@@ -10,6 +10,7 @@
 					<div class="tableaction  col-md-12 col-lg-12 pull-left">
 						<button class='btn btn-default btn-success' ng-click="lightboxAddArticle =true;"><span class="glyphicon glyphicon-plus"></span> Ajouter</button>
 						<button class='btn btn-default btn-primary' ng-click="editPage()" ng-disabled="nbChecked != 1"><span class="glyphicon glyphicon-edit"></span> Modifier</button>
+						<button class='btn btn-default btn-primary' ng-click="editImage()" ng-disabled="nbChecked != 1"><span class="glyphicon glyphicon-picture"></span> Modifier les image</button>
 						<button class='btn btn-default btn-danger' ng-hide="supprimerVerif" ng-click="suppVerif()" ng-disabled="disableOptions"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
 						<button class='btn btn-danger' ng-show="supprimerVerif" ng-click="supprimer()" ng-disabled="disableOptions"> <span class="glyphicon glyphicon-trash"></span>Supprimer définitivement?</button>
 						<div class="nbselected ">
@@ -30,10 +31,10 @@
 			                <label for="description">Contenu</label>
 			                <textarea type="text" class="form-control" id="description" name="description" placeholder="Entrez votre description"  rows="7" ng-model="newArticleInputDescription"></textarea>
 			            </div>
-			            <div class="form-group" rel="urlFB">
+			            <!-- <div class="form-group" rel="urlFB">
 			                <label for="urlFB">Url facebook</label>
 			                <input type="text" class="form-control" name="urlFB" placeholder="Entrez l'url facebook de votre article" ng-model="newArticleInputUrlFB"required>
-			            </div>
+			            </div> -->
 			           
 						<div class="handleErrors"></div>
 						<button type="submit" class="btn btn-default" >Submit</button>
@@ -52,16 +53,45 @@
 			                <label for="description">Description</label>
 			                <textarea type="text" class="form-control" id="description" name="description" placeholder="Entrez votre description"  rows="7" ng-model="editArticleInputDescription"></textarea>
 			            </div>
-			            <div class="form-group" rel="name">
+			           <!--  <div class="form-group" rel="name">
 			                <label for="name">Url facebook</label>
 			                <input type="text" class="form-control" name="urlFB" placeholder="Entrez l'url facebook de votre article" ng-model="editArticleInputUrlFB"required>
-			            </div>
+			            </div> -->
 			           
 						<div class="handleErrors"></div>
 						<button type="submit" class="btn btn-default" >Submit</button>
 					</form>
 				</div>
-			  	<table class="table table-bordered table-hover tablesorter">
+				<div class="lightbox col-md-8 col-lg-8 " ng-show="lightboxImageArticle">
+					<button type="button" class="close" ng-click="lightboxImageArticle = false; closeLightBox()">×</button>
+					<div class="form-group col-xs-4 projectImgs" >
+			                <label for="description">Images de l'article</label>
+			                <div class="projImgs">
+								<img ng-repeat="image in projimages" title="{{image.title}}"ng-src="/uploads/miniThumb/{{image.name}}" ng-click="selectImg(image)" ng-class="{selected: image.selected}">
+								
+							</div>
+							<div class="transfert">
+				            	<div class="btn" ng-click="link()"><span class="glyphicon glyphicon-circle-arrow-left"></span></div>
+				            	<div class="btn" ng-click="unlink()"><span class="glyphicon glyphicon-circle-arrow-right"></span></div>
+				            </div>
+						</div>
+						<div class="form-group col-xs-8 chooseImgs" >
+							<label for="description">Choisir des images</label>
+							<div class="btn-group btn-group-xs">
+							  	<button type="button" class="btn btn-default" ng-class="{selected : tri=='all'}" ng-click="filtering('all')">Toutes</button>
+							  	<button type="button" class="btn btn-default selected" ng-class="{selected : tri=='free'}" ng-click="filtering('free')">Libres</button>
+							  	<button type="button" class="btn btn-default" ng-class="{selected : tri=='use'}" ng-click="filtering('use')">Utilisées</button>
+							</div>
+							<div class="projImgs">
+								<img ng-repeat="image in imageToShow" title="{{image.title}}"ng-src="/uploads/miniThumb/{{image.name}}" ng-click="selectImg(image)" ng-class="{selected: image.selected}">
+								
+							</div>
+			            </div>
+			            <div class="form-group col-xs-8 chooseImgs" >
+			            	<button ng-click="lightboxImageArticle = false; closeLightBox()" class="btn btn-default" >Terminer</button>
+			        	</div>
+				</div>
+			  	<table class="table table-bordered table-hover tablesorter tableArticle">
 					<thead>
 						<tr>
 							<th style="width: 30px;">
@@ -70,25 +100,26 @@
 							<th>Titre <i class="fa fa-sort"></i></th>
 							<th>Contenu <i class="fa fa-sort"></i></th>
 							<th>Dernière modif<i class="fa fa-sort"></i></th>
-							<!-- <th>Images <i class="fa fa-sort"></i></th> -->
+							<th style="width: 195px;">Images <i class="fa fa-sort"></i></th>
 						 </tr>
 					</thead>
 					<tbody>
 						<tr class="chargement" ng-hide="chargementTerminer">
 							<td colspan="4">Chargement . . .</td>
 						</tr>
-					  <tr ng-repeat="article in articles"  ng-class="{selectedRow: article.selected}" ng-dblclick="checkAll(true);article.selected = true; editPage() ">
+					  <tr ng-repeat="article in articles"  ng-class="{selectedRow: article.selected}">
 
 						<td><input type="checkbox" ng-model="article.selected"></td>
-						<td>{{ article.title }}</td>
-						<td>{{ article.content | wrap }}</td>
-						<td>{{ article.updatedAt | date:'dd/MM/yyyy' }}</td>
-						<!-- <td>
-							<img src="" width="30px" height="30px">
-							<img src="" width="30px" height="30px">
-							<img src="" width="30px" height="30px">
-							<img src="" width="30px" height="30px">
-						</td> -->
+						<td  ng-dblclick="checkAll(true);article.selected = true; editPage() ">{{ article.title }}</td>
+						<td  ng-dblclick="checkAll(true);article.selected = true; editPage() ">{{ article.content | wrap }}</td>
+						<td  ng-dblclick="checkAll(true);article.selected = true; editPage() ">{{ article.updatedAt | date:'dd/MM/yyyy' }}</td>
+						<td ng-dblclick="closeLightBox(); checkAll(true); article.selected=true; editImage(article)">
+							<img  ng-repeat="image in article.images | limitTo:4"  ng-src="/uploads/miniThumb/{{image.name}}" width="30px" height="30px">
+							
+							<!--  -->
+							<small class="badge"ng-show="article.images.length-4 > 0">+{{ article.images.length - 4}}</small>
+							<div ng-hide="article.images.length" class="btn addimgLink" ng-click="closeLightBox(); checkAll(true); article.selected=true; editImage(article)">Ajouter des images</div>
+						</td>
 					  </tr>
 					  
 					  

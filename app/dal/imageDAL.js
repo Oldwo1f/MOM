@@ -88,6 +88,44 @@ var async = require('async');
 
         });
     };
+ imageDAL.prototype.getAllWithArticle = function(callbackk) {
+    console.log('GETWithARticle'); 
+        dbContext.image.findAll({order: 'id DESC'}).success(function(images) {
+            
+            async.map(images,function(image,cb) {
+                image.getArticles().success(function(projects) {
+                    // console.log(projects); 
+                    image.articles = JSON.stringify(projects);
+                    // console.log(image); 
+                    cb(null,JSON.stringify(projects));
+                })
+            },function(err,results) {
+               if(err) console.log(err); 
+               else{
+                    for(var i in images)
+                    {
+                        // console.log('__________________________________'+i); 
+                        // console.log(results[i]); 
+                       // if(i==3){console.log(images[i]);} 
+                        // images[i].dataValues.projects = '';
+
+                        images[i].url = JSON.parse(results[i]);
+                        // if(i==3){console.log(images[i]);} 
+                        // console.log(images); 
+                       
+                    }
+                     callbackk(images);
+               }
+                
+                
+            });
+
+
+
+
+
+        });
+    };
 
     /**
      * save image
@@ -160,6 +198,48 @@ var async = require('async');
             },
             proj:function(callback){
                 dbContext.project.find(projId).success(function(proj) {
+                    callback(null,proj)
+                });
+            }
+        },
+        function(err, results){
+            results.proj.removeImage(results.img).success(function() {
+                console.log('sucessSet');
+                callback();
+            })
+        });
+    };
+imageDAL.prototype.linkArticle = function(projId,imageId,callback) { 
+        
+        async.parallel({
+            img : function(callback){
+               dbContext.image.find(imageId).success(function(img) {
+                    callback(null,img)
+                });
+            },
+            proj:function(callback){
+                dbContext.article.find(projId).success(function(proj) {
+                    callback(null,proj)
+                });
+            }
+        },
+        function(err, results){
+            results.proj.addImage(results.img).success(function() {
+                console.log('sucessSet');
+                callback();
+            })
+        });
+    };
+    imageDAL.prototype.unlinkArticle = function(projId,imageId,callback) { 
+        
+        async.parallel({
+            img : function(callback){
+               dbContext.image.find(imageId).success(function(img) {
+                    callback(null,img)
+                });
+            },
+            proj:function(callback){
+                dbContext.article.find(projId).success(function(proj) {
                     callback(null,proj)
                 });
             }
